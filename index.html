@@ -14,13 +14,81 @@
     <div class="container is-max-desktop">
         <div id="library-title" class="notification is-info">
             <h1 class="title is-1">MaoMao's Library</h1>
-            <p class="subtitle is-3">Place where you can... Well, get books.</p>
+            <p class="subtitle is-3">Place where you can organize... well, books.</p>
         </div>
-        <div class="library-control notification is-light">
-            <div class="buttons">
-                <button class="button is-dark">Add new book</button>
+        <div id="library-control" class="library-control notification is-info is-light">
+            <div class="new-book-info">
+                <label class="label" for="new-title">Title</label>
+                <input id="new-title" class="input" type="text" placeholder="Title">
+            </div>
+            <div class="new-book-info">
+                <label class="label" for="new-author">Author</label>
+                <input id="new-author" class="input" type="text" placeholder="Author">
+            </div>
+            <div class="new-book-pages">
+                <label class="label" for="new-pages">Pages</label>
+                <input id="new-pages" class="input" type="number" placeholder="Pages">
+            </div>
+            <div class="new-book-button buttons">
+                <button class="button is-link">Add</button>
+            </div>            
+        </div>
+        <div id="library-list" class="library-list notification is-info is-light">
+            <div class="list-head is-flex is-justify-content-space-between">
+                <p class="head-title w40">Title</p>
+                <p class="head-author w40">Author</p>
+                <p class="head-pages w10">Pages</p>
+                <p class="read-status w10">Status</p>
+            </div>
+            <div class="list-books">
+                <article class="book is-flex">
+                    <p class="book-title w40">Mushoku Tensei: Isekai Ittara Honki Dasu</p>
+                    <p class="book-author w40">Maganote</p>
+                    <p class="book-pages w5">619</p>
+                    <p class="book-status buttons are-small w15 is-flex is-justify-content-space-between">
+                        <button class="button is-danger">Not Read</button>
+                        <button class="delete button is-danger"></button>
+                    </p>
+                </article>
+                <article class="book is-flex">
+                    <p class="book-title w40">Harry Potter</p>
+                    <p class="book-author w40">J.K Rowling</p>
+                    <p class="book-pages w5">420</p>
+                    <p class="book-status buttons are-small w15 is-flex is-justify-content-space-between">
+                        <button class="button is-success">Read</button>
+                        <button class="delete button is-danger"></button>
+                    </p>
+                </article>
+                <article class="book is-flex">
+                    <p class="book-title w40">One Piece</p>
+                    <p class="book-author w40">Eiichiro Oda</p>
+                    <p class="book-pages w5">240</p>
+                    <p class="book-status buttons are-small w15 is-flex is-justify-content-space-between">
+                        <button class="button is-danger">Not Read</button>
+                        <button class="delete button is-danger"></button>
+                    </p>
+                </article>
+                <article class="book is-flex">
+                    <p class="book-title w40">Berserk</p>
+                    <p class="book-author w40">Kentaro Miura</p>
+                    <p class="book-pages w5">69</p>
+                    <p class="book-status buttons are-small w15 is-flex is-justify-content-space-between">
+                        <button class="button is-success">Read</button>
+                        <button class="delete button is-danger"></button>
+                    </p>
+                </article>
+                <article class="book is-flex">
+                    <p class="book-title w40">World Trigger</p>
+                    <p class="book-author w40">Daisuke Ashihara</p>
+                    <p class="book-pages w5">129</p>
+                    <p class="book-status buttons are-small w15 is-flex is-justify-content-space-between">
+                        <button class="button is-danger">Not Read</button>
+                        <button class="delete button is-danger"></button>
+                    </p>
+                </article>
             </div>
         </div>
+        
         
     </div>
     <script src="main.js"></script>    
