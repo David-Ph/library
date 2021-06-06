@@ -16,21 +16,36 @@ class Book{
         this.hasRead = hasRead;
     }
     toggleRead(){
-        this.hasRead = (false) ? true : false;
+        if(this.hasRead === true){
+            this.hasRead = false;
+        }else{
+            this.hasRead = true;
+        }
     }
 }
 //                  VAR
 // /////////////////////
 let myLibrary = [
+
+];
+let tempBooks = [
     {title: 'Mushoku Tensei', author: 'Maganote', pages: '295', hasRead: false},
     {title: 'Harry Potter', author: 'J.K Rowling', pages: '295', hasRead: false},
     {title: 'One Piece', author: 'Eiichiro Oda', pages: '295', hasRead: false},
 ];
 
+tempBooks.forEach((book) =>{
+    let newBookTitle = book.title;
+    let newBookAuthor = book.author;
+    let newBookPages = book.pages;
+    let newBook = new Book(newBookTitle, newBookAuthor, newBookPages, true);
+    myLibrary.push(newBook);
+})
 
 //                  EVENT LISTENERS
 // /////////////////////////////////
 addBtn.addEventListener('click', addBookToLibrary);
+booksBlock.addEventListener('click', toggleReadStatus);
 
 
 //                  FUNCTION
@@ -41,10 +56,14 @@ function addBookToLibrary(){
     let newBookPages = newPages.value;
     let newBook = new Book(newBookTitle, newBookAuthor, newBookPages);
 
+    if(checkForDuplicate(newBook)){
+        return;
+    }
+
     myLibrary.push(newBook);
     showNewBook(newBook);
     resetInput()
-    
+
 }
 
 function showNewBook(newBook){
@@ -54,7 +73,7 @@ function showNewBook(newBook){
             <p class="book-author w40">${newBook.author}</p>
             <p class="book-pages w5">${newBook.pages}</p>
             <p class="book-status buttons are-small w15 is-flex is-justify-content-space-between">
-                <button class="button is-danger">Not Read</button>
+                <button class="button is-danger toggle-read-btn">Not Read</button>
                 <button class="delete button is-danger"></button>
             </p>
         </article>
@@ -65,6 +84,7 @@ function showNewBook(newBook){
 function showAllBook(){
     booksBlock.innerHTML = '';
     myLibrary.forEach((book) =>{
+        book.toggleRead();
         let newBookTitle = book.title;
         let newBookAuthor = book.author;
         let newBookPages = book.pages;
@@ -74,7 +94,7 @@ function showAllBook(){
                 <p class="book-author w40">${newBookAuthor}</p>
                 <p class="book-pages w5">${newBookPages}</p>
                 <p class="book-status buttons are-small w15 is-flex is-justify-content-space-between">
-                    <button class="button is-danger">Not Read</button>
+                    <button class="button is-danger toggle-read-btn">Not Read</button>
                     <button class="delete button is-danger"></button>
                 </p>
             </article>
@@ -83,10 +103,42 @@ function showAllBook(){
     })
 }
 
+function toggleReadStatus(e){
+    if(e.target.classList.contains('toggle-read-btn')){
+        let titleToToggle = e.target.parentNode.parentNode.querySelector('.book-title').innerHTML;
+        let authorToToggle = e.target.parentNode.parentNode.querySelector('.book-author').innerHTML;
+        let bookInLibrary = findBookByTitleAndAuthor(titleToToggle, authorToToggle);
+        if(bookInLibrary[0].hasRead){
+            bookInLibrary[0].toggleRead();
+            e.target.innerHTML = 'Not Read';
+            e.target.classList.remove('is-success');
+            e.target.classList.add('is-danger');
+        }else{
+            bookInLibrary[0].toggleRead();
+            e.target.innerHTML = 'Read';
+            e.target.classList.remove('is-danger');
+            e.target.classList.add('is-success');
+        }
+    }
+}
+
+function findBookByTitleAndAuthor(title, author){
+    let findBook = myLibrary.filter(book => book.title === title && book.author === author);
+    return findBook;
+}
+
 function resetInput(){
     newTitle.value = '';
     newAuthor.value = '';
     newPages.value = '';
+}
+
+function checkForDuplicate(newBook){
+    let duplicates = findBookByTitleAndAuthor(newBook.title, newBook.author);
+    if(duplicates.length){
+        alert('There is already a book with the same title and author!');
+        return true;
+    }
 }
 
 //              EXECUTION
