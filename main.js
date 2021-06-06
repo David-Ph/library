@@ -46,6 +46,7 @@ tempBooks.forEach((book) =>{
 // /////////////////////////////////
 addBtn.addEventListener('click', addBookToLibrary);
 booksBlock.addEventListener('click', toggleReadStatus);
+booksBlock.addEventListener('click', deleteBook);
 
 
 //                  FUNCTION
@@ -119,6 +120,17 @@ function toggleReadStatus(e){
             e.target.classList.remove('is-danger');
             e.target.classList.add('is-success');
         }
+    }
+}
+
+function deleteBook(e){
+    if(e.target.classList.contains('delete')){
+        let titleToDelete = e.target.parentNode.parentNode.querySelector('.book-title').innerHTML;
+        let authorToDelete = e.target.parentNode.parentNode.querySelector('.book-author').innerHTML;
+        let bookToDelete = e.target.parentNode.parentNode;
+        // let bookInLibrary = findBookByTitleAndAuthor(titleToDelete, authorToDelete);
+        myLibrary = myLibrary.filter(book => book.title != titleToDelete && book.author != authorToDelete);
+        booksBlock.removeChild(bookToDelete);
     }
 }
 
