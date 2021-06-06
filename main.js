@@ -52,6 +52,7 @@ booksBlock.addEventListener('click', deleteBook);
 //                  FUNCTION
 // /////////////////////////////////
 function addBookToLibrary(){
+    if(newTitle.value === ''|| newAuthor.value === '' || newPages.value === '') {alert('Please fill book info!'); return;};
     let newBookTitle = newTitle.value;
     let newBookAuthor = newAuthor.value;
     let newBookPages = newPages.value;
